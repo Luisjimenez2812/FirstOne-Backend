@@ -1,6 +1,6 @@
-use firstOne;
+use firstone;
 
-db.createCollection('clientes');
+db.createCollection("clientes");
 db.createCollection('empresas');
-db.createCollection('motoristas');
+db.createCollection('categorias');
 db.createCollection('ordenesDisponibles');
