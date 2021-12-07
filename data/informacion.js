@@ -139,7 +139,11 @@ db.categorias.insertMany([
 db.ordenesDisponibles.insertMany([
     {
         "estado": "disponible",
-        "fecha": "12/11/2021",
+        "fecha": {
+           "dia": "12",
+           "mes": "11",
+           "anio": "2021"
+        },
         "cliente": {
             "_id": "",
             "nombres": "Luis Eduardo",
@@ -165,16 +169,3 @@ db.ordenesDisponibles.insertMany([
         ],
     }
 ]);
-
-/*"carrito": {
-    "productos": [
-        {
-            "nombre": "Mouse Logitech",
-            "descripcion": "Mouse inalambrico gaming Logitech G502 Lightspeed",
-            "precio": "1491.40",
-            "imagen": "images/logitech-mouse.jpg",
-            "cantidad": "1"
-        }
-    ],
-    "total": "1491.40"
-},*/
