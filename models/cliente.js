@@ -8,7 +8,7 @@ var esquema = mongoose.Schema({
     "correo": String,
     "telefono": String,
     "imagen": String,
-    "fechaNacimiento": mongoose.SchemaTypes.Mixed,
+    "fechaNacimiento": String,
     "contrasena": String,
     "historialOrdenes": mongoose.SchemaTypes.Mixed,
     "ordenesPendientesEntrega": mongoose.SchemaTypes.Mixed,

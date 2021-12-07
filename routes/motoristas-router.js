@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var empresa = require('../models/empresas');
+var motorista = require('../models/motorista');
 
 module.exports = router;

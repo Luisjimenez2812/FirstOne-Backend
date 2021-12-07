@@ -7,11 +7,7 @@ db.clientes.insertMany([
         "correo": "lromeroj@gmail.com",
         "telefono": "+504 3247-2880",
         "imagen": "images/luis-perfil.jpg",
-        "fechaNacimiento": {
-            "dia": "28",
-            "mes": "12",
-            "anio": "1998"
-        },
+        "fechaNacimiento": "28/12/1998",
         "contrasena": "lromero",
         "historialOrdenes": [
             {
@@ -54,15 +50,12 @@ db.clientes.insertMany([
                 "imagen": ""
             }
         ],
-        "direccionesEntrega": [
-            {
-                "_id": ObjectId(),
-                "direccion": "",
-                "referencia": "",
-                "longitud": "",
-                "latitud": ""
-            }
-        ]
+        "direccionesEntrega": {
+            "direccion": "",
+            "referencia": "",
+            "longitud": "",
+            "latitud": ""
+        }
     },
 ]);
 
@@ -75,11 +68,7 @@ db.motoristas.insertMany([
         "correo": "jrodriguez",
         "telefono": "12345678",
         "imagen": "images/juan-perfil.jpg",
-        "fechaNacimiento": {
-            "dia": "12",
-            "mes": "12",
-            "anio": "2000"
-        },
+        "fechaNacimiento": "12/12/2000",
         "contrasena": "jrodriguez",
         "historialEntregas": [
             {
@@ -139,11 +128,7 @@ db.categorias.insertMany([
 db.ordenesDisponibles.insertMany([
     {
         "estado": "disponible",
-        "fecha": {
-           "dia": "12",
-           "mes": "11",
-           "anio": "2021"
-        },
+        "fecha": "12/11/2020",
         "cliente": {
             "_id": "",
             "nombres": "Luis Eduardo",
