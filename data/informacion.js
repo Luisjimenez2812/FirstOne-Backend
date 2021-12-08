@@ -125,7 +125,7 @@ db.categorias.insertMany([
     }
 ]);
 
-db.ordenesDisponibles.insertMany([
+db.ordenesdisponibles.insertMany([
     {
         "estado": "disponible",
         "fecha": "12/11/2020",

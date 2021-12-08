@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/clientes', clientesRouter);
 app.use('/motoristas', motoristasRouter);
 app.use('/categorias', categoriasRouter);
-app.use('/ordenesDisponibles', ordenesDisponiblesRouter);
+app.use('/ordenes-disponibles', ordenesDisponiblesRouter);
 
 app.get('/', function(req, res){
     res.send("Se ha recibido una petición.")

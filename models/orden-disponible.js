@@ -7,4 +7,4 @@ var esquema = mongoose.Schema({
     productos: mongoose.SchemaTypes.Mixed,
 });
 
-module.exports = mongoose.model('ordenesDisponibles', esquema);
+module.exports = mongoose.model('ordenesdisponibles', esquema);

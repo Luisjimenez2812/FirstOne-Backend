@@ -1,8 +1,7 @@
 var express = require('express');
-const { mongoose } = require('mongoose');
 var router = express.Router();
-
 var cliente = require('../models/cliente');
+var mongoose = require('mongoose');
 
 //Obtener solo un cliente
 router.get("/:idCliente", function(req, res){
@@ -103,8 +102,6 @@ router.get("/:idCliente/direccion-entrega/", function(req, res){
     });
 });
 
-
-
 //Guardar en el historial de ordenes recibidas
 router.post("/:idCliente/historial-ordenes/", function(req, res){
 	cliente.update(
@@ -114,7 +111,7 @@ router.post("/:idCliente/historial-ordenes/", function(req, res){
             
             $push: {
                 historialOrdenes: {
-                    "_id": req.body._id,
+                    _id: mongoose.Types.ObjectId(),
                     "estado": req.body.estado,
                     "fecha": req.body.fecha,
                     "productos": req.body.productos
@@ -137,7 +134,7 @@ router.post("/:idCliente/ordenes-pendientes/", function(req, res){
         },{
             $push: {                
                 ordenesPendientesEntrega: {
-                    "_id": req.body._id,
+                    _id: mongoose.Types.ObjectId(),
                     "estado": req.body.estado,
                     "fecha": req.body.fecha,
                     "productos": req.body.productos
@@ -160,6 +157,7 @@ router.post('/:idCliente/empresas-favoritas/', function(req, res){
         },{
             $push: {                
                 empresasFavoritas: {
+                    _id: mongoose.Types.ObjectId(),
                     nombre: req.body.nombre,
                     descripcion: req.body.descripcion,
                     imagen: req.body.imagen
