@@ -134,5 +134,22 @@ router.post('/:idCategoria/empresas/:idEmpresa/productos', function(req, res){
     });
 });
 
+//Guardar un producto en una empresa en una categoria
+router.get('/:idCategoria/empresas/:idEmpresa/productos', function(req, res){
+	categoria.find(
+        {
+            _id : mongoose.Types.ObjectId(req.params.idCategoria),
+            "empresas._id" : mongoose.Types.ObjectId(req.params.idEmpresa)
+        },{         
+            "empresas.$":true
+        })
+    .then((result) => {
+        res.send(result[0].empresas[0].productos);res.end();
+    })
+    .catch((error) => {
+        res.send(error);res.end();
+    });
+});
+
 
 module.exports = router;

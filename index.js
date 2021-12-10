@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var fileupload = require('express-fileupload');
 
 var database = require('./modules/db')
 var clientesRouter = require('./routes/clientes-router');
@@ -13,6 +14,8 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(fileupload({useTempFiles : true,tempFileDir : '/tmp/'}))
+
 
 app.use('/clientes', clientesRouter);
 app.use('/motoristas', motoristasRouter);
@@ -23,6 +26,6 @@ app.get('/', function(req, res){
     res.send("Se ha recibido una petición.")
 });
 
-app.listen(8880, function(){
+app.listen(8888, function(){
     console.log("El servidor se ha levantado.");
 });
