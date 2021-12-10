@@ -43,13 +43,15 @@ router.post("/", function(req, res){
 	motorista.find(
         {
             correo: req.body.correo,
-            contrasena: req.body.contrasena
+            contrasena: req.body.password
         },{}
     )
     .then((result) => {
+        console.log("res", req.body.password);
         res.send(result[0]);res.end();
     })
     .catch((error) => {
+        console.log("error", req.body.password);
         res.send(error);res.end();
     });
 });
