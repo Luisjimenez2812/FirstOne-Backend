@@ -305,4 +305,28 @@ router.put("/:idCliente/actualizar-imagen", (req, res) => {
     });
 });
 
+//Actualizar direccion
+router.put("/:idCliente/direccion-entrega", (req, res) => {
+	cliente
+		.updateOne(
+			{_id: req.params.idCliente},
+			{
+				$set:{
+                    direccionesEntrega:{
+                        direccion: req.body.direccion,
+                        referencia: req.body.referencia,
+                        longitud: req.body.longitud,
+                        latitud: req.body.latitud
+                    }
+                }
+			}
+		)
+		.then((result) => {
+            res.send(result);res.end();
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
 module.exports = router;
