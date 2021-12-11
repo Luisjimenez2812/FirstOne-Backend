@@ -48,7 +48,7 @@ router.post("/registrar", function(req, res){
                     "latitud": req.body.latitud
                 }
             },
-            "productos": []
+            "productos": req.body.productos
         }
     );
     datos.save()
@@ -78,6 +78,20 @@ router.put("/:idOrdenDisponible/actualizar-estado", (req, res) => {
             res.send(result[0]);res.end();
         })
         .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
+//Eliminar una orden
+router.delete("/:idOrdenDisponible", (req, res) => {
+    ordenDisponible
+        .remove(
+            {_id: req.params.idOrdenDisponible},{}
+        )
+        .then(result=>{
+            res.send(result);res.end();
+        })
+        .catch(error=>{
             res.send(error);res.end();
         });
 });

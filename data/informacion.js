@@ -81,7 +81,9 @@ db.motoristas.insertMany([
             {
                 "_id": "",
                 "estado": "",
-                "titulo": ""
+                "fecha": "",
+                "cliente": "",
+                "productos": ""
             }
         ]
     }
@@ -94,48 +96,163 @@ db.categorias.insertMany([
         "empresas": [
             {
                 "_id": ObjectId(),
-                "nombres": "Logitech",
-                "descripcion": "Empresa dedicada a la elaboración y distribución de productos tecnológicos.",
-                "correo": "logitech@gmail.com",
+                "nombres": "L'oréal Paris",
+                "descripcion": "L'Oréal es una empresa francesa de cosméticos y belleza, creada en 1909 por el químico Eugène Schueller",
+                "correo": "loreal@gmail.com",
                 "telefono": "12345678",
-                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032721/FirstOne/empresas/qivoyrmjhteublif3qx9.png",
-                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032721/FirstOne/empresas/qivoyrmjhteublif3qx9.png",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038136/FirstOne/categorias/empresas/ap5nvac0ka3gtujitqeh.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038136/FirstOne/categorias/empresas/ap5nvac0ka3gtujitqeh.png",
                 "calificacion": "4",
                 "productos": [
                     {
                         "_id": ObjectId(),
-                        "nombre": "Mouse gaming inalambrico",
-                        "descripcion": "Mouse inalambrico gaming Logitech G502 Lightspeed",
-                        "precio": "1491.40",
-                        "imagen": "images/g502-lightspeed.jpg",
+                        "nombre": "Base de maquillaje 5D Sable Doré",
+                        "descripcion": "La base de maquillaje Accord Parfait calca tu tono exacto y se adapta a todos tus matices. ",
+                        "precio": "225.77",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041741/FirstOne/categorias/empresas/productos/f3thp05du87ohfs7bkev.png",
                         "cantidad": "9"
-                    },
+                    }
+                ],
+            },
+            {
+                "_id": ObjectId(),
+                "nombres": "MAC Cosmetics",
+                "descripcion": "MAC o M·A·C Cosmetics es una empresa de productos dedicada al maquillaje y cosméticos canadiense.",
+                "correo": "masccosmetics@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038136/FirstOne/categorias/empresas/fxawpmcsohqjvfm5crzb.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038136/FirstOne/categorias/empresas/fxawpmcsohqjvfm5crzb.png",
+                "calificacion": "4",
+                "productos": [
                     {
                         "_id": ObjectId(),
-                        "nombre": "Mouse M720 Triathlon",
-                        "descripcion": "Ratón inalábrico multidispositivo con desplazamiento ultra rápido",
-                        "precio": "1230.19",
-                        "imagen": "images/m720-triathlon.jpg",
-                        "cantidad": "14"
+                        "nombre": "SURPRISE EYES EYE SHADOW X 6",
+                        "descripcion": "A limited-edition Eye Shadow palette featuring waves of six all-new Warm, Cool, and Rich-toned shades in a pocket-sized mirrored compact. ",
+                        "precio": "715.97",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041741/FirstOne/categorias/empresas/productos/f3thp05du87ohfs7bkev.png",
+                        "cantidad": "6"
+                    }
+                ],
+            },
+        ]
+    },
+    {
+        "nombre": "Farmacias",
+        "icono": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032058/FirstOne/categorias/tcswb6mbascuwuiyssxl.png",
+        "empresas":[
+            {
+                "_id": ObjectId(),
+                "nombres": "Farmacias Kielsa",
+                "descripcion": "Farmacias kielsa descripción",
+                "correo": "farmaciaskielsa@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038137/FirstOne/categorias/empresas/cgrecs4yhmp063gpyezn.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038136/FirstOne/categorias/empresas/eqa1jlnb087becfg8rev.png",
+                "calificacion": "4",
+                "productos": [
+                    {
+                        "_id": ObjectId(),
+                        "nombre": "Farinter Alcohol",
+                        "descripcion": "Alcohol Clínico Mentolado 250ML.",
+                        "precio": "55.60",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041741/FirstOne/categorias/empresas/productos/ehjwgs58cndily2z6epd.png",
+                        "cantidad": "40"
+                    }
+                ],
+            },
+            {
+                "_id": ObjectId(),
+                "nombres": "Farmacias Punto Farma",
+                "descripcion": "Farmacias punto farma descripción",
+                "correo": "farmaciaskielsa@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038137/FirstOne/categorias/empresas/wtoktxq2ljn2xyi2vkca.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038137/FirstOne/categorias/empresas/wtoktxq2ljn2xyi2vkca.png",
+                "calificacion": "4",
+                "productos": [
+                    {
+                        "_id": ObjectId(),
+                        "nombre": "Acetaminofen Mk",
+                        "descripcion": "Acetaminofen Mk 500 Mg 20 tabletas",
+                        "precio": "55.30",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041741/FirstOne/categorias/empresas/productos/a7zjpsy1gfmg4a7602bj.jpg",
+                        "cantidad": "15"
                     }
                 ],
             }
         ]
     },
     {
-        "nombre": "Farmacias",
-        "icono": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032058/FirstOne/categorias/tcswb6mbascuwuiyssxl.png",
-        "empresas":[]
-    },
-    {
         "nombre": "Super",
         "icono": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032058/FirstOne/categorias/n7owo0g2p2owrhxpo58e.svg",
-        "empresas":[]
+        "empresas":[
+            {
+                "_id": ObjectId(),
+                "nombres": "Walmart",
+                "descripcion": "Walmart es una corporación multinacional de tiendas de origen estadounidense, que opera cadenas de grandes almacenes de descuento y clubes de almacenes.",
+                "correo": "walmart@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041859/FirstOne/categorias/empresas/stmeqlhe4itgngikyezf.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041859/FirstOne/categorias/empresas/stmeqlhe4itgngikyezf.png",
+                "calificacion": "4",
+                "productos": [
+                    {
+                        "_id": ObjectId(),
+                        "nombre": "Ranchitas Yummies Natrual",
+                        "descripcion": "Ranchitas Yummies Natural 750 Gr",
+                        "precio": "73.50",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041741/FirstOne/categorias/empresas/productos/aceydrbmxcbuzo0v1ggz.jpg",
+                        "cantidad": "15"
+                    }
+                ],
+            },
+            {
+                "_id": ObjectId(),
+                "nombres": "Supermercados La Colonia",
+                "descripcion": "Supermercados la colonia descripción",
+                "correo": "supermercadoslacolonia@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038138/FirstOne/categorias/empresas/oh79guvaovpesnkigcyn.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038138/FirstOne/categorias/empresas/oh79guvaovpesnkigcyn.png",
+                "calificacion": "4",
+                "productos": [
+                    {
+                        "_id": ObjectId(),
+                        "nombre": "Mayonesa Essential",
+                        "descripcion": "Mayonesa Essential Everyday Real 30 Oz",
+                        "precio": "114.90",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041740/FirstOne/categorias/empresas/productos/kqemyducqg0fuejbr9qq.jpg",
+                        "cantidad": "5"
+                    }
+                ],
+            }
+        ]
     },
     {
         "nombre": "Ropa",
         "icono": "https://res.cloudinary.com/dekixopkw/image/upload/v1639032057/FirstOne/categorias/foef60zo00myh7hcdzzt.png",
-        "empresas":[]
+        "empresas":[
+            {
+                "_id": ObjectId(),
+                "nombres": "Malibu",
+                "descripcion": "Malibu descripción.",
+                "correo": "malibu@gmail.com",
+                "telefono": "12345678",
+                "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038137/FirstOne/categorias/empresas/cfq2mpvdc9fn9ktm4pog.png",
+                "baner": "https://res.cloudinary.com/dekixopkw/image/upload/v1639038137/FirstOne/categorias/empresas/cfq2mpvdc9fn9ktm4pog.png",
+                "calificacion": "4",
+                "productos": [
+                    {
+                        "_id": ObjectId(),
+                        "nombre": "Camiseta para mujer",
+                        "descripcion": "Camiseta para mujer.",
+                        "precio": "180.55",
+                        "imagen": "https://res.cloudinary.com/dekixopkw/image/upload/v1639041740/FirstOne/categorias/empresas/productos/dcmihub1dikduuw1izvk.webp",
+                        "cantidad": "3"
+                    }
+                ],
+            }
+        ]
     },
     {
         "nombre": "Calzado",

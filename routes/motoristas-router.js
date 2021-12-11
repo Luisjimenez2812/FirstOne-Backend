@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var router = express.Router();
 
 var motorista = require('../models/motorista');
@@ -40,20 +41,14 @@ router.get("/", function(req, res){
 
 //iniciar sesión motorista
 router.post("/", function(req, res){
-	motorista.find(
+    motorista.find(
         {
             correo: req.body.correo,
             contrasena: req.body.password
         },{}
     )
-    .then((result) => {
-        console.log("res", req.body.password);
-        res.send(result[0]);res.end();
-    })
-    .catch((error) => {
-        console.log("error", req.body.password);
-        res.send(error);res.end();
-    });
+    .then((result) => {res.send(result[0]);res.end();})
+    .catch((error) => {res.send(error);res.end();});
 });
 
 //registro motorista
@@ -134,6 +129,75 @@ router.put("/:idMotorista/actualizar-imagen", (req, res) => {
 			{
 				$set: {
                     imagen: req.body.imagen
+				},
+			}
+		)
+		.then((result) => {
+            res.send(result);res.end();
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
+//Obtener el historial de entregas
+router.get("/:idMotorista/historial-entregas/", function(req, res){
+	motorista.find(
+        {
+            _id : req.params.idMotorista,
+        },{
+            historialEntregas: true
+        })
+    .then((result) => {
+        res.send(result[0].historialEntregas);res.end();
+    })
+    .catch((error) => {
+        res.send(error);res.end();
+    });
+});
+
+//Obtener las ordenes tomadas
+router.get("/:idMotorista/ordenes-tomadas/", function(req, res){
+	motorista.find(
+        {
+            _id : req.params.idMotorista,
+        },{
+            ordenesTomadas: true
+        })
+    .then((result) => {
+        res.send(result[0].ordenesTomadas);res.end();
+    })
+    .catch((error) => {
+        res.send(error);res.end();
+    });
+});
+
+//Obtener las ordenes tomadas
+router.post("/:idMotorista/ordenes-tomadas/", function(req, res){
+	motorista
+		.updateOne(
+			{_id: req.params.idMotorista},
+			{
+				$push: {
+                    ordenesTomadas: {
+                        "_id" : mongoose.Types.ObjectId(req.body._id),
+                        "estado": req.body.estado,
+                        "fecha": req.body.fecha,
+                        "cliente": {
+                            "_id": mongoose.Types.ObjectId(req.body.idCliente),
+                            "nombres": req.body.nombres,
+                            "apellidos": req.body.apellidos,
+                            "telefono": req.body.telefono,
+                            "direccionEntrega": {
+                                "_id": mongoose.Types.ObjectId(req.body.idDireccion),
+                                "direccion": req.body.direccion,
+                                "referencia": req.body.referencia,
+                                "longitud": req.body.longitud,
+                                "latitud": req.body.latitud
+                            }
+                        },
+                        "productos": req.body.productos
+                    }
 				},
 			}
 		)

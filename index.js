@@ -8,6 +8,7 @@ var clientesRouter = require('./routes/clientes-router');
 var motoristasRouter = require('./routes/motoristas-router');
 var categoriasRouter = require('./routes/categorias-router');
 var ordenesDisponiblesRouter = require('./routes/ordenes-disponibles-router');
+var administradorRouter = require('./routes/administrador-router');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use('/clientes', clientesRouter);
 app.use('/motoristas', motoristasRouter);
 app.use('/categorias', categoriasRouter);
 app.use('/ordenes-disponibles', ordenesDisponiblesRouter);
+app.use('/administradors', administradorRouter);
 
 app.get('/', function(req, res){
     res.send("Se ha recibido una petición.")
