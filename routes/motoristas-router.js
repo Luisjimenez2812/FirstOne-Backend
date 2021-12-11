@@ -30,7 +30,7 @@ router.get("/:idMotorista", function(req, res){
 
 //Obtener todos los motoristas
 router.get("/", function(req, res){
-	motorista.find({},{})
+	motorista.find({},{contrasena:false})
     .then((result) => {
         res.send(result);res.end();
     })
