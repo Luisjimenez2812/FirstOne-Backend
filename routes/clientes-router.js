@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var cliente = require('../models/cliente');
+var ordenDisponible = require('../models/orden-disponible');
 var mongoose = require('mongoose');
 
 var cloudinary = require('cloudinary').v2;
@@ -150,7 +151,7 @@ router.post("/:idCliente/historial-ordenes/", function(req, res){
     });
 });
 
-//Guardar en las ordenes pendientes de entrega
+/*//Guardar en las ordenes pendientes de entrega
 router.post("/:idCliente/ordenes-pendientes/", function(req, res){
 	cliente.update(
         {
@@ -161,6 +162,7 @@ router.post("/:idCliente/ordenes-pendientes/", function(req, res){
                     _id: mongoose.Types.ObjectId(),
                     "estado": req.body.estado,
                     "fecha": req.body.fecha,
+
                     "productos": req.body.productos
                 }
             }
@@ -171,7 +173,7 @@ router.post("/:idCliente/ordenes-pendientes/", function(req, res){
     .catch((error) => {
         res.send(error);res.end();
     });
-});
+});*/
 
 //Guardar en empresas favoritas
 router.post('/:idCliente/empresas-favoritas/', function(req, res){
@@ -228,7 +230,8 @@ router.post("/registrarse", function(req, res){
             "historialOrdenes": [],
             "ordenesPendientesEntrega": [],
             "empresasFavoritas": [],
-            "direccionesEntrega": []
+            "direccionesEntrega": [],
+            "tarjeta": {}
         }
     );
     datos.save()
@@ -328,5 +331,68 @@ router.put("/:idCliente/direccion-entrega", (req, res) => {
             res.send(error);res.end();
         });
 });
+
+//Guardar orden nueva en la colección ordenes disponibles
+router.post("/confirmar-compra", function(req, res){
+    var idOrden = mongoose.Types.ObjectId();
+	let datosOrdenesDisponibles =  new ordenDisponible(
+        {
+            "_id": idOrden,
+            "estado": "disponible",
+            "fecha": req.body.fecha,
+            "total": req.body.total,
+            "cliente": {
+                "_id": mongoose.Types.ObjectId(req.body.idCliente),
+                "nombres": req.body.nombres,
+                "apellidos": req.body.apellidos,
+                "telefono": req.body.telefono,
+                "direccionEntrega": {
+                    "direccion": req.body.direccion,
+                    "referencia": req.body.referencia,
+                    "longitud": req.body.longitud,
+                    "latitud": req.body.latitud
+                }
+            },
+            "productos": req.body.productos
+        }
+    );
+    datosOrdenesDisponibles.save()
+    .then((result) => {
+        cliente.updateOne(
+            {
+                _id : mongoose.Types.ObjectId(req.body.idCliente),
+            },{
+                $push: {                
+                    ordenesPendientesEntrega: {
+                        _id: idOrden,
+                        estado: "Pendiente",
+                        fecha: req.body.fecha,
+                        total: req.body.total,
+                        productos: req.body.productos
+                    }
+                }
+            })
+        .then((result2) => {
+            res.send({ordenDisponible: result, ordenPendiente: result2});res.end();
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+    })
+    .catch((error) => {
+        res.send(error);res.end();
+    });
+});
+
+/*"metodoPago": req.body.metodoPago,
+"nombreTitular": req.body.nombreTitular,
+"numeroTarjeta": req.body.numeroTarjeta,
+"vencimiento": req.body.vencimiento,
+"cvv": req.body.cvv,
+"longitud": req.body.longitud,
+"latitud": req.body.latitud,
+"direccion": req.body.direccion,
+"referencia": req.body.referencia,
+"total": req.body.total,*/
 
 module.exports = router;

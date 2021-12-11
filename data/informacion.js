@@ -30,6 +30,7 @@ db.clientes.insertMany([
                 "_id": "",
                 "estado": "origen",
                 "fecha": "12/10/2021",
+                "total": "",
                 "productos": [
                     {
                         "_id": "",
@@ -310,6 +311,7 @@ db.ordenesdisponibles.insertMany([
     {
         "estado": "disponible",
         "fecha": "12/11/2020",
+        "total": "",
         "cliente": {
             "_id": "",
             "nombres": "Luis Eduardo",
