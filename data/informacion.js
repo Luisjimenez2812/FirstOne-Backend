@@ -335,3 +335,10 @@ db.ordenesdisponibles.insertMany([
         ],
     }
 ]);
+
+db.administradors.insertMany([
+    {
+        "usuario":"admin",
+        "contrasena":"asd.456"
+    }
+]);

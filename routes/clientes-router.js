@@ -23,8 +23,7 @@ router.get("/:idCliente", function(req, res){
             correo: true,
             telefono: true,
             imagen: true,
-            fechaNacimiento: true,
-            contrasena: true
+            fechaNacimiento: true
         }
     )
     .then((result) => {

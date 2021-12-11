@@ -61,9 +61,9 @@ router.post("/registrarse", function(req, res){
             "genero": req.body.genero,
             "correo": req.body.correo,
             "telefono": req.body.telefono,
-            "imagen": req.body.imagen,
+            "imagen": 'https://res.cloudinary.com/dekixopkw/image/upload/v1639033655/FirstOne/Clientes/yu6fnfkvgu6hhd9fmwii.png',
             "fechaNacimiento": req.body.fechaNacimiento,
-            "contrasena": req.body.contrasena,
+            "contrasena": req.body.password,
             "historialEntregas": [],
             "ordenesTomadas": []
         }
@@ -141,7 +141,7 @@ router.put("/:idMotorista/actualizar-imagen", (req, res) => {
 });
 
 //Obtener el historial de entregas
-router.get("/:idMotorista/historial-entregas/", function(req, res){
+router.get("/:idMotorista/historial-entregas", function(req, res){
 	motorista.find(
         {
             _id : req.params.idMotorista,
@@ -157,7 +157,7 @@ router.get("/:idMotorista/historial-entregas/", function(req, res){
 });
 
 //Obtener las ordenes tomadas
-router.get("/:idMotorista/ordenes-tomadas/", function(req, res){
+router.get("/:idMotorista/ordenes-tomadas", function(req, res){
 	motorista.find(
         {
             _id : req.params.idMotorista,
@@ -172,8 +172,8 @@ router.get("/:idMotorista/ordenes-tomadas/", function(req, res){
     });
 });
 
-//Obtener las ordenes tomadas
-router.post("/:idMotorista/ordenes-tomadas/", function(req, res){
+//Guardar orden a un motorista
+router.post("/:idMotorista/ordenes-tomadas", function(req, res){
 	motorista
 		.updateOne(
 			{_id: req.params.idMotorista},
