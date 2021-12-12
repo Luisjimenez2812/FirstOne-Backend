@@ -12,6 +12,8 @@ var administradorRouter = require('./routes/administrador-router');
 
 var app = express();
 
+app.set('port', process.env.PORT || 3000);
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,6 +30,6 @@ app.get('/', function(req, res){
     res.send("Se ha recibido una petición.")
 });
 
-app.listen(8888, function(){
-    console.log("El servidor se ha levantado.");
+app.listen(app.get('port'), function(){
+    console.log(`El servidor se ha levantado en el puerto ${app.get('port')}`);
 });
