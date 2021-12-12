@@ -111,7 +111,7 @@ router.delete("/:idCliente/empresas-favoritas/", function(req, res){
     });
 });
 
-//Obtener las empresas favoritas
+//Obtener la direccion de entrega
 router.get("/:idCliente/direccion-entrega/", function(req, res){
 	cliente.find(
         {
@@ -223,6 +223,7 @@ router.post("/registrarse", function(req, res){
             "usuario": req.body.usuario,
             "genero": req.body.genero,
             "correo": req.body.correo,
+            "contrasena": req.body.password,
             "telefono": req.body.telefono,
             "imagen": 'https://res.cloudinary.com/dekixopkw/image/upload/v1639033655/FirstOne/Clientes/yu6fnfkvgu6hhd9fmwii.png',
             "fechaNacimiento": req.body.fechaNacimiento,

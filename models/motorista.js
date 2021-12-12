@@ -10,6 +10,7 @@ var esquema = mongoose.Schema({
     "imagen": String,
     "fechaNacimiento": String,
     "contrasena": String,
+    "aprobado": String,
     "historialEntregas": mongoose.SchemaTypes.Mixed,
     "ordenesTomadas": mongoose.SchemaTypes.Mixed
 });

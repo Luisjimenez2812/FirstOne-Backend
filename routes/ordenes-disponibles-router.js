@@ -60,9 +60,6 @@ router.post("/registrar", function(req, res){
     });
 });
 
-//Tomar una orden disponible
-
-
 //Cambiar estado de una orden
 router.put("/:idOrdenDisponible/actualizar-estado", (req, res) => {
 	ordenDisponible

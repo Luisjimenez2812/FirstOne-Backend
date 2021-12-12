@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 
 var motorista = require('../models/motorista');
+var cliente = require('../models/cliente');
 
 //Obtener solo un motorista
 router.get("/:idMotorista", function(req, res){
@@ -16,8 +17,7 @@ router.get("/:idMotorista", function(req, res){
             correo: true,
             telefono: true,
             imagen: true,
-            fechaNacimiento: true,
-            contrasena: true
+            fechaNacimiento: true
         }
     )
     .then((result) => {
@@ -64,6 +64,7 @@ router.post("/registrarse", function(req, res){
             "imagen": 'https://res.cloudinary.com/dekixopkw/image/upload/v1639033655/FirstOne/Clientes/yu6fnfkvgu6hhd9fmwii.png',
             "fechaNacimiento": req.body.fechaNacimiento,
             "contrasena": req.body.password,
+            "aprobado": "0",
             "historialEntregas": [],
             "ordenesTomadas": []
         }
@@ -184,20 +185,130 @@ router.post("/:idMotorista/ordenes-tomadas", function(req, res){
                         "estado": req.body.estado,
                         "fecha": req.body.fecha,
                         "cliente": {
-                            "_id": mongoose.Types.ObjectId(req.body.idCliente),
-                            "nombres": req.body.nombres,
-                            "apellidos": req.body.apellidos,
-                            "telefono": req.body.telefono,
-                            "direccionEntrega": {
-                                "_id": mongoose.Types.ObjectId(req.body.idDireccion),
-                                "direccion": req.body.direccion,
-                                "referencia": req.body.referencia,
-                                "longitud": req.body.longitud,
-                                "latitud": req.body.latitud
+                            "_id": mongoose.Types.ObjectId(req.body.cliente._id),
+                            "nombres": req.body.cliente.nombres,
+                            "apellidos": req.body.cliente.apellidos,
+                            "telefono": req.body.cliente.telefono,
+                            "direccionEntrega": {}
+                        },
+                        "productos": req.body.productos,
+                        "total": req.body.total,
+                    }
+				},
+			}
+		)
+		.then((result) => {
+            res.send(result);res.end();
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
+//Actualizar estado orden
+router.put("/ordenes-tomadas/:idOrden/cambiar-estado", (req, res) => {
+	motorista
+		.updateOne(
+			{
+                _id: mongoose.Types.ObjectId(req.body.idMotorista),
+                "ordenesTomadas._id" : mongoose.Types.ObjectId(req.params.idOrden)
+            },
+			{
+				$set: {
+                    "ordenesTomadas.$.estado": req.body.estado
+				},
+			}
+		)
+		.then((result1) => {
+            cliente
+                .updateOne(
+                    {
+                        _id: mongoose.Types.ObjectId(req.body.idCliente),
+                        "ordenesPendientesEntrega._id" : mongoose.Types.ObjectId(req.params.idOrden)
+                    },{
+                        $set: {
+                            "ordenesPendientesEntrega.$.estado": req.body.estado
+                        },
+                    }
+                )
+                .then((result2) => {
+                    res.send({result1: result1, result2: result2});res.end();
+                })
+                .catch((error) => {
+                    res.send(error);res.end();
+                });
+            
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
+//Guardar orden al historial de un motorista y de un cliente
+router.post("/:idMotorista/historial-entregas", function(req, res){
+    let d = "destino";
+	motorista
+		.updateOne(
+			{
+                _id: req.params.idMotorista,
+                "ordenesTomadas.estado": d
+            },{
+				$push: {
+                    historialEntregas: {
+                        "_id" : mongoose.Types.ObjectId(req.body.idOrden),
+                        "fecha": req.body.fecha,
+                        "estado": "entregado",
+                        "cliente": {
+                            "_id": mongoose.Types.ObjectId(req.body.cliente._id),
+                            "nombres": req.body.cliente.nombres,
+                            "apellidos": req.body.cliente.apellidos,
+                            "telefono": req.body.cliente.telefono,
+                            "direccionEntrega": {}
+                        },
+                        "productos": req.body.productos,
+                        "total": req.body.total,
+                    }
+				},
+			}
+		)
+		.then((result1) => {
+            cliente
+                .updateOne(
+                    {
+                        _id: req.body.cliente._id,
+                        "ordenesPendientesEntrega.estado": d
+                    },{
+                        $push: {
+                            historialOrdenes: {
+                                "_id" : mongoose.Types.ObjectId(req.body.idOrden),
+                                "fecha": req.body.fecha,
+                                "estado": "entregado",
+                                "productos": req.body.productos,
+                                "total": req.body.total,
                             }
                         },
-                        "productos": req.body.productos
                     }
+                )
+                .then((result2) => {
+                    res.send({result1: result1, result2: result2});res.end();
+                })
+                .catch((error) => {
+                    res.send(error);res.end();
+                });
+        })
+        .catch((error) => {
+            res.send(error);res.end();
+        });
+});
+
+//aprobar motorista
+router.put("/:idMotorista/aprobar", (req, res) => {
+	motorista
+		.updateOne(
+			{_id: req.params.idMotorista},
+			{
+				$set: {
+					aprobar: "1",
 				},
 			}
 		)
