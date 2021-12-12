@@ -12,7 +12,7 @@ var administradorRouter = require('./routes/administrador-router');
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8888);
 
 app.use(cors());
 app.use(bodyParser.json());
