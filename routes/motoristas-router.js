@@ -64,7 +64,7 @@ router.post("/registrarse", function(req, res){
             "imagen": 'https://res.cloudinary.com/dekixopkw/image/upload/v1639033655/FirstOne/Clientes/yu6fnfkvgu6hhd9fmwii.png',
             "fechaNacimiento": req.body.fechaNacimiento,
             "contrasena": req.body.password,
-            "aprobado": "0",
+            "aprobado": 0,
             "historialEntregas": [],
             "ordenesTomadas": []
         }
@@ -308,7 +308,7 @@ router.put("/:idMotorista/aprobar", (req, res) => {
 			{_id: req.params.idMotorista},
 			{
 				$set: {
-					aprobar: "1",
+					aprobado: 1,
 				},
 			}
 		)
