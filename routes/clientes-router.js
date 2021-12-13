@@ -227,7 +227,6 @@ router.post("/registrarse", function(req, res){
             "telefono": req.body.telefono,
             "imagen": 'https://res.cloudinary.com/dekixopkw/image/upload/v1639033655/FirstOne/Clientes/yu6fnfkvgu6hhd9fmwii.png',
             "fechaNacimiento": req.body.fechaNacimiento,
-            "contrasena": req.body.contrasena,
             "historialOrdenes": [],
             "ordenesPendientesEntrega": [],
             "empresasFavoritas": [],
